@@ -4,101 +4,182 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terraform graph</title>
-  </head>
-  <body>
-    <div style="display: flex">
-      <ul style="min-width: 300px"></ul>
-      <table style="min-width: 300px; flex: 1">
-        <thead>
-          <th>Property</th>
-          <th>Old value</th>
-          <th>New value</th>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <script>
-      const colors = {
-        'create-delete': 'blue',
-        create: 'green',
-        update: 'yellow',
-        delete: 'red',
-        'delete-create': 'orange',
+
+    <style>
+      div {
+        display: flex;
+        gap: 1.5rem;
       }
 
+      ul {
+        margin: 0;
+        padding-left: 1rem;
+        list-style-type: none;
+      }
+
+      ul li span {
+        padding-left: 0.5rem;
+      }
+
+      ul li button {
+        outline: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      ul li button:after {
+        content: ' >';
+      }
+
+      ul li button.selected {
+        text-decoration: underline;
+      }
+
+      ul ul li:before {
+        content: '┗';
+      }
+
+      table {
+        border-collapse: collapse;
+        min-width: 300px;
+        flex: 1;
+      }
+
+      table th {
+        padding: 0.25rem 0.5rem;
+      }
+
+      table tbody tr:nth-child(odd) {
+        background-color: var(--vscode-tree-tableOddRowsBackground);
+      }
+
+      table td {
+        max-width: 500px;
+        vertical-align: top;
+        padding: 0.25rem 0.5rem;
+      }
+
+      table td pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin: 0;
+      }
+
+      .create {
+        color: var(--vscode-charts-green);
+      }
+
+      .delete {
+        color: var(--vscode-charts-red);
+      }
+
+      .update,
+      .delete-create,
+      .create-delete {
+        color: var(--vscode-charts-yellow);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul></ul>
+      <table></table>
+    </div>
+    <script>
+      const vscode = acquireVsCodeApi()
+
       const ul = document.querySelector('ul')
-      const tbody = document.querySelector('tbody')
+      const table = document.querySelector('table')
 
       function diff(changes) {
-        tbody.innerHTML = ''
+        table.innerHTML = ''
+
+        const tbody = document.createElement('tbody')
+        table.appendChild(tbody)
 
         for (const { key, action, before, after } of changes) {
           const tr = document.createElement('tr')
           tbody.append(tr)
 
           let td = document.createElement('td')
-          td.style.color = colors[action]
-          td.style.verticalAlign = 'top'
+          td.classList.add(action)
           td.innerText = key
           tr.append(td)
 
           let pre = document.createElement('pre')
-          pre.style.whiteSpace = 'pre-wrap'
-          pre.style.wordWrap = 'break-word'
-          pre.style.margin = 0
           pre.innerText = before
           td = document.createElement('td')
-          td.style.maxWidth = '500px'
-          td.style.verticalAlign = 'top'
           td.append(pre)
           tr.append(td)
 
+          td = document.createElement('td')
+          td.innerText = '→'
+          tr.append(td)
+
           pre = document.createElement('pre')
-          pre.style.whiteSpace = 'pre-wrap'
-          pre.style.wordWrap = 'break-word'
-          pre.style.margin = 0
           pre.innerText = after
           td = document.createElement('td')
-          td.style.maxWidth = '500px'
-          td.style.verticalAlign = 'top'
           td.append(pre)
           tr.append(td)
+        }
+      }
+
+      function onButtonClick(button) {
+        document.querySelectorAll('.selected').forEach((selected) => selected.classList.remove('selected'))
+        button.classList.add('selected')
+        const state = vscode.getState()
+        if (state) {
+          const { address } = button.dataset
+          let tree = state.tree
+          for (const part of address.split('.')) {
+            tree = tree.children[part]
+          }
+          diff(tree.diff.changes)
+          vscode.setState({ ...state, table: table.innerHTML })
         }
       }
 
       function appendChild(parent, tree) {
         const li = document.createElement('li')
+        parent.appendChild(li)
+
         if (tree.diff) {
-          li.style.color = colors[tree.diff.action]
           const button = document.createElement('button')
+          button.classList.add(tree.diff.action)
           button.innerText = tree.label
-          button.addEventListener('click', () => {
-            diff(tree.diff.changes)
-          })
+          button.dataset.address = tree.diff.address
+          button.setAttribute('onclick', 'onButtonClick(this)')
           li.appendChild(button)
         } else {
-          li.innerText = tree.label
+          const span = document.createElement('span')
+          span.innerText = tree.label
+          li.appendChild(span)
         }
+
         const children = Object.values(tree.children)
         if (children.length) {
           const ul = document.createElement('ul')
-          li.appendChild(ul)
           for (const child of children) {
             appendChild(ul, child)
           }
+          li.appendChild(ul)
         }
-        parent.appendChild(li)
       }
 
       window.addEventListener('message', (event) => {
-        appendChild(ul, JSON.parse(event.data))
+        ul.innerHTML = ''
+        const tree = JSON.parse(event.data)
+        appendChild(ul, tree)
+        vscode.setState({ tree, ul: ul.innerHTML })
       })
 
-      if (window.acquireVsCodeApi) {
-        const vscode = window.acquireVsCodeApi()
-        const state = vscode.getState()
-        if (state) {
-          appendChild(ul, JSON.parse(state.text))
+      const state = vscode.getState()
+      if (state) {
+        ul.innerHTML = state.ul
+        if (state.table) {
+          table.innerHTML = state.table
         }
       }
     </script>

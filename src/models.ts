@@ -16,6 +16,7 @@ export interface IResource {
 }
 
 export interface IDiff {
+  address: string
   action: string
   changes: {
     key: string
