@@ -1,6 +1,6 @@
 {
-  "name": "terraform-ui",
-  "displayName": "terraform-ui",
+  "name": "terraform-graph",
+  "displayName": "terraform-graph",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -14,7 +14,7 @@
   "contributes": {
     "customEditors": [
       {
-        "viewType": "terraform-ui.graph",
+        "viewType": "terraform-graph.view",
         "displayName": "Terraform graph",
         "selector": [
           {
@@ -26,7 +26,7 @@
     ],
     "commands": [
       {
-        "command": "terraform-ui.graph",
+        "command": "terraform-graph.show",
         "title": "Show Terraform graph"
       }
     ]
