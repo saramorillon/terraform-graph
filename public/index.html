@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terraform graph</title>
+  </head>
+  <body>
+    <div style="display: flex">
+      <ul style="min-width: 300px"></ul>
+      <table style="min-width: 300px; flex: 1">
+        <thead>
+          <th>Property</th>
+          <th>Old value</th>
+          <th>New value</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script>
+      const ul = document.querySelector('ul')
+      const tbody = document.querySelector('tbody')
+
+      const colors = {
+        'create-delete': 'blue',
+        create: 'green',
+        update: 'yellow',
+        delete: 'red',
+        'delete-create': 'orange',
+      }
+
+      function equal(obj1, obj2) {
+        if (!obj1 && !obj2) {
+          return true
+        }
+
+        if (typeof obj1 !== typeof obj2) {
+          return false
+        }
+
+        if (typeof obj1 === 'object' && typeof obj2 === 'object' && obj1 && obj2) {
+          const keys1 = Object.keys(obj1)
+          const keys2 = Object.keys(obj2)
+
+          if (keys1.length !== keys2.length) {
+            return false
+          }
+
+          for (let key of keys1) {
+            if (!equal(obj1[key], obj2[key])) {
+              return false
+            }
+          }
+
+          return true
+        }
+
+        return obj1 === obj2
+      }
+
+      function getKeys(before, after) {
+        const beforeKeys = Object.keys(before)
+        const afterKeys = Object.keys(after)
+
+        const keys = new Set()
+        for (let i = 0; i < Math.max(beforeKeys.length, afterKeys.length); i++) {
+          if (beforeKeys[i]) keys.add(beforeKeys[i])
+          if (afterKeys[i]) keys.add(afterKeys[i])
+        }
+
+        return [...keys]
+      }
+
+      function getAction(before, after) {
+        if (equal(before, after)) return 'no-op'
+        if (!before) return 'create'
+        if (!after) return 'delete'
+        return 'update'
+      }
+
+      function getContent(value) {
+        let parsed = value
+        try {
+          parsed = JSON.parse(value)
+        } catch (error) {}
+        return (typeof parsed === 'object' ? JSON.stringify(parsed, null, 2) : parsed) || '-'
+      }
+
+      function diff(before, after) {
+        tbody.innerHTML = ''
+
+        const keys = getKeys(before, after)
+        for (const key of keys) {
+          const action = getAction(before[key], after[key])
+          console.log(key, before[key], after[key], action)
+
+          if (action === 'no-op') continue
+
+          const tr = document.createElement('tr')
+          tbody.append(tr)
+
+          let td = document.createElement('td')
+          td.style.color = colors[action]
+          td.style.verticalAlign = 'top'
+          td.innerText = key
+          tr.append(td)
+
+          let pre = document.createElement('pre')
+          pre.style.whiteSpace = 'pre-wrap'
+          pre.style.wordWrap = 'break-word'
+          pre.style.margin = 0
+          pre.innerText = getContent(before[key])
+          td = document.createElement('td')
+          td.style.maxWidth = '500px'
+          td.style.verticalAlign = 'top'
+          td.append(pre)
+          tr.append(td)
+
+          pre = document.createElement('pre')
+          pre.style.whiteSpace = 'pre-wrap'
+          pre.style.wordWrap = 'break-word'
+          pre.style.margin = 0
+          pre.innerText = getContent(after[key])
+          td = document.createElement('td')
+          td.style.maxWidth = '500px'
+          td.style.verticalAlign = 'top'
+          td.append(pre)
+          tr.append(td)
+        }
+      }
+
+      function appendChild(parent, tree) {
+        const li = document.createElement('li')
+        if (tree.resource) {
+          li.style.color = colors[tree.resource.change.actions.join('-')]
+          const button = document.createElement('button')
+          button.innerText = tree.label
+          button.addEventListener('click', () => {
+            const keys = Object.keys(tree.resource.change.after_unknown)
+            for (const key of keys) {
+              tree.resource.change.after[key] = '(known after apply)'
+            }
+            diff(tree.resource.change.before, tree.resource.change.after)
+          })
+          li.appendChild(button)
+        } else {
+          li.innerText = tree.label
+        }
+        const children = Object.values(tree.children)
+        if (children.length) {
+          const ul = document.createElement('ul')
+          li.appendChild(ul)
+          for (const child of children) {
+            appendChild(ul, child)
+          }
+        }
+        parent.appendChild(li)
+      }
+
+      function updateContent(plan) {
+        const tree = { label: 'root', children: {} }
+
+        for (const resource of plan.resource_changes) {
+          if (resource.change.actions[0] === 'no-op') continue
+          let curr = tree
+          for (const label of resource.address.split('.')) {
+            if (!curr.children[label]) {
+              curr.children[label] = { label, children: {} }
+            }
+            curr = curr.children[label]
+          }
+          curr.resource = resource
+        }
+
+        appendChild(ul, tree)
+      }
+
+      window.addEventListener('message', (event) => {
+        updateContent(JSON.parse(event.data))
+      })
+
+      const vscode = acquireVsCodeApi()
+      const state = vscode.getState()
+      if (state) {
+        updateContent(JSON.parse(state.text))
+      }
+    </script>
+  </body>
+</html>
