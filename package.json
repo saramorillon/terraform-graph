@@ -4,6 +4,13 @@
   "description": "",
   "version": "1.0.0",
   "license": "MIT",
+  "author": {
+    "name": "Sara Morillon",
+    "url": "https://saramorillon.com"
+  },
+  "repository": {
+    "url": "https://github.com/saramorillon/terraform-graph"
+  },
   "engines": {
     "vscode": "^1.78.0"
   },
