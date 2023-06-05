@@ -7,20 +7,26 @@ export interface IResource {
   module_address?: string
   type: string
   name: string
-  change: IChange
+  change: {
+    actions: string[]
+    before: Record<string, unknown> | null
+    after: Record<string, unknown> | null
+    after_unknown: Record<string, unknown>
+  }
 }
 
-export interface IChange {
-  actions: string[]
-  before: { [key: string]: unknown } | null
-  after: { [key: string]: unknown } | null
-  after_unknown: { [key: string]: unknown }
+export interface IDiff {
+  action: string
+  changes: {
+    key: string
+    action: string
+    before: string
+    after: string
+  }[]
 }
 
 export interface ITree {
   label: string
-  resource?: IResource
-  children: {
-    [key: string]: ITree
-  }
+  diff?: IDiff
+  children: Record<string, ITree>
 }

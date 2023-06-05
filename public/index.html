@@ -18,9 +18,6 @@
       </table>
     </div>
     <script>
-      const ul = document.querySelector('ul')
-      const tbody = document.querySelector('tbody')
-
       const colors = {
         'create-delete': 'blue',
         create: 'green',
@@ -29,73 +26,13 @@
         'delete-create': 'orange',
       }
 
-      function equal(obj1, obj2) {
-        if (!obj1 && !obj2) {
-          return true
-        }
+      const ul = document.querySelector('ul')
+      const tbody = document.querySelector('tbody')
 
-        if (typeof obj1 !== typeof obj2) {
-          return false
-        }
-
-        if (typeof obj1 === 'object' && typeof obj2 === 'object' && obj1 && obj2) {
-          const keys1 = Object.keys(obj1)
-          const keys2 = Object.keys(obj2)
-
-          if (keys1.length !== keys2.length) {
-            return false
-          }
-
-          for (let key of keys1) {
-            if (!equal(obj1[key], obj2[key])) {
-              return false
-            }
-          }
-
-          return true
-        }
-
-        return obj1 === obj2
-      }
-
-      function getKeys(before, after) {
-        const beforeKeys = Object.keys(before)
-        const afterKeys = Object.keys(after)
-
-        const keys = new Set()
-        for (let i = 0; i < Math.max(beforeKeys.length, afterKeys.length); i++) {
-          if (beforeKeys[i]) keys.add(beforeKeys[i])
-          if (afterKeys[i]) keys.add(afterKeys[i])
-        }
-
-        return [...keys]
-      }
-
-      function getAction(before, after) {
-        if (equal(before, after)) return 'no-op'
-        if (!before) return 'create'
-        if (!after) return 'delete'
-        return 'update'
-      }
-
-      function getContent(value) {
-        let parsed = value
-        try {
-          parsed = JSON.parse(value)
-        } catch (error) {}
-        return (typeof parsed === 'object' ? JSON.stringify(parsed, null, 2) : parsed) || '-'
-      }
-
-      function diff(before, after) {
+      function diff(changes) {
         tbody.innerHTML = ''
 
-        const keys = getKeys(before, after)
-        for (const key of keys) {
-          const action = getAction(before[key], after[key])
-          console.log(key, before[key], after[key], action)
-
-          if (action === 'no-op') continue
-
+        for (const { key, action, before, after } of changes) {
           const tr = document.createElement('tr')
           tbody.append(tr)
 
@@ -109,7 +46,7 @@
           pre.style.whiteSpace = 'pre-wrap'
           pre.style.wordWrap = 'break-word'
           pre.style.margin = 0
-          pre.innerText = getContent(before[key])
+          pre.innerText = before
           td = document.createElement('td')
           td.style.maxWidth = '500px'
           td.style.verticalAlign = 'top'
@@ -120,7 +57,7 @@
           pre.style.whiteSpace = 'pre-wrap'
           pre.style.wordWrap = 'break-word'
           pre.style.margin = 0
-          pre.innerText = getContent(after[key])
+          pre.innerText = after
           td = document.createElement('td')
           td.style.maxWidth = '500px'
           td.style.verticalAlign = 'top'
@@ -131,16 +68,12 @@
 
       function appendChild(parent, tree) {
         const li = document.createElement('li')
-        if (tree.resource) {
-          li.style.color = colors[tree.resource.change.actions.join('-')]
+        if (tree.diff) {
+          li.style.color = colors[tree.diff.action]
           const button = document.createElement('button')
           button.innerText = tree.label
           button.addEventListener('click', () => {
-            const keys = Object.keys(tree.resource.change.after_unknown)
-            for (const key of keys) {
-              tree.resource.change.after[key] = '(known after apply)'
-            }
-            diff(tree.resource.change.before, tree.resource.change.after)
+            diff(tree.diff.changes)
           })
           li.appendChild(button)
         } else {
@@ -157,32 +90,16 @@
         parent.appendChild(li)
       }
 
-      function updateContent(plan) {
-        const tree = { label: 'root', children: {} }
-
-        for (const resource of plan.resource_changes) {
-          if (resource.change.actions[0] === 'no-op') continue
-          let curr = tree
-          for (const label of resource.address.split('.')) {
-            if (!curr.children[label]) {
-              curr.children[label] = { label, children: {} }
-            }
-            curr = curr.children[label]
-          }
-          curr.resource = resource
-        }
-
-        appendChild(ul, tree)
-      }
-
       window.addEventListener('message', (event) => {
-        updateContent(JSON.parse(event.data))
+        appendChild(ul, JSON.parse(event.data))
       })
 
-      const vscode = acquireVsCodeApi()
-      const state = vscode.getState()
-      if (state) {
-        updateContent(JSON.parse(state.text))
+      if (window.acquireVsCodeApi) {
+        const vscode = window.acquireVsCodeApi()
+        const state = vscode.getState()
+        if (state) {
+          appendChild(ul, JSON.parse(state.text))
+        }
       }
     </script>
   </body>
