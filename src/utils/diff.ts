@@ -3,20 +3,20 @@ import isEqual = require('lodash.isequal')
 
 export function getDiff(resource: IResource): IDiff {
   const diff: IDiff = { address: resource.address, action: resource.change.actions.join('-'), changes: [] }
-  if (resource.change.before && resource.change.after) {
-    for (const key of Object.keys(resource.change.after_unknown)) {
-      resource.change.after[key] = '(known after apply)'
-    }
-    for (const key of getKeys(resource.change.before, resource.change.after)) {
-      const action = getAction(resource.change.before[key], resource.change.after[key])
-      if (action === 'no-op') continue
-      diff.changes.push({
-        key,
-        action,
-        before: getContent(resource.change.before[key]),
-        after: getContent(resource.change.after[key]),
-      })
-    }
+  resource.change.before = resource.change.before || {}
+  resource.change.after = resource.change.after || {}
+  for (const key of Object.keys(resource.change.after_unknown)) {
+    resource.change.after[key] = '(known after apply)'
+  }
+  for (const key of getKeys(resource.change.before, resource.change.after)) {
+    const action = getAction(resource.change.before[key], resource.change.after[key])
+    if (action === 'no-op') continue
+    diff.changes.push({
+      key,
+      action,
+      before: getContent(resource.change.before[key]),
+      after: getContent(resource.change.after[key]),
+    })
   }
   return diff
 }
