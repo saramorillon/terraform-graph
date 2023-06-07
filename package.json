@@ -35,8 +35,8 @@
     ],
     "commands": [
       {
-        "command": "terraform-graph.show",
-        "title": "Show Terraform graph"
+        "command": "terraform-graph.generate",
+        "title": "Generate Terraform graph"
       }
     ]
   },

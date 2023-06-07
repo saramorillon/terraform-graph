@@ -4,7 +4,7 @@ import { GraphEditor } from './editors/graph'
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand('terraform-graph.show', graphCommand),
+    vscode.commands.registerCommand('terraform-graph.generate', graphCommand),
     vscode.window.registerCustomEditorProvider('terraform-graph.view', new GraphEditor(context))
   )
 }
