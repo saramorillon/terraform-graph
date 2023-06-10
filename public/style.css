@@ -1,0 +1,79 @@
+#root {
+  display: flex;
+  gap: 1.5rem;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1rem;
+  list-style-type: none;
+}
+
+ul li span {
+  padding-left: 0.5rem;
+}
+
+ul li label {
+  cursor: pointer;
+}
+
+ul li label:after {
+  content: ' >';
+}
+
+ul li label.selected {
+  text-decoration: underline;
+}
+
+ul ul li:before {
+  content: '┗';
+}
+
+input {
+  display: none;
+}
+
+input:checked + table {
+  display: initial;
+}
+
+table {
+  display: none;
+  border-collapse: collapse;
+  min-width: 300px;
+  flex: 1;
+}
+
+table th {
+  padding: 0.25rem 0.5rem;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--vscode-tree-tableOddRowsBackground);
+}
+
+table td {
+  max-width: 500px;
+  vertical-align: top;
+  padding: 0.25rem 0.5rem;
+}
+
+table td pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.create {
+  color: var(--vscode-charts-green);
+}
+
+.delete {
+  color: var(--vscode-charts-red);
+}
+
+.update,
+.delete-create,
+.create-delete {
+  color: var(--vscode-charts-yellow);
+}
