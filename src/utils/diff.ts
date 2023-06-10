@@ -21,7 +21,7 @@ export function getDiff(resource: IResource): IDiff {
   return diff
 }
 
-function getKeys(before: { [key: string]: unknown }, after: { [key: string]: unknown }) {
+function getKeys(before: { [key: string]: unknown }, after: { [key: string]: unknown }): string[] {
   const beforeKeys = Object.keys(before)
   const afterKeys = Object.keys(after)
 
@@ -34,14 +34,14 @@ function getKeys(before: { [key: string]: unknown }, after: { [key: string]: unk
   return [...keys]
 }
 
-function getAction(before: unknown, after: unknown) {
+function getAction(before: unknown, after: unknown): string {
   if (isEqual(before, after)) return 'no-op'
   if (!before) return 'create'
   if (!after) return 'delete'
   return 'update'
 }
 
-function getContent(value: unknown) {
+function getContent(value: unknown): string {
   if (typeof value === 'object') {
     return JSON.stringify(value, null, 2)
   }
