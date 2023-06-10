@@ -2,7 +2,7 @@
   "name": "terraform-graph",
   "displayName": "Terraform Graph",
   "description": "",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "author": {
     "name": "Sara Morillon",
