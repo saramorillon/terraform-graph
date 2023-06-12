@@ -62,7 +62,7 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
     return (
       <li>
         {tree.diff ? (
-          <label htmlFor={tree.diff.address} className={tree.diff.action}>
+          <label htmlFor={encodeURIComponent(tree.diff.address)} className={tree.diff.action}>
             {tree.label}
           </label>
         ) : (
@@ -85,7 +85,7 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
       <>
         {tree.diff && (
           <>
-            <input id={tree.diff.address} type="radio" name="table" />
+            <input id={encodeURIComponent(tree.diff.address)} type="radio" name="table" />
             <table>
               <tbody>
                 {tree.diff.changes.map((change) => (
