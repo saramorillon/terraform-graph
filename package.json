@@ -1,7 +1,7 @@
 {
   "name": "terraform-graph",
   "displayName": "Terraform Graph",
-  "description": "",
+  "description": "Visual representation of a Terraform plan, showing added, deleted and updated resources",
   "version": "1.2.1",
   "license": "MIT",
   "author": {
