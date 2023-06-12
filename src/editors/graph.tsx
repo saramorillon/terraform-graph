@@ -87,6 +87,7 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
           <>
             <input id={encodeURIComponent(tree.diff.address)} type="radio" name="table" />
             <table>
+              <caption>{tree.diff.address.split('.').join(' / ')}</caption>
               <tbody>
                 {tree.diff.changes.map((change) => (
                   <tr key={change.key}>

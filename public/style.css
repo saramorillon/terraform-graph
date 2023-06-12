@@ -1,6 +1,7 @@
 #root {
   display: flex;
   gap: 1.5rem;
+  padding: 0.75rem;
 }
 
 ul {
@@ -34,7 +35,7 @@ input {
 }
 
 input:checked + table {
-  display: initial;
+  display: table;
 }
 
 table {
@@ -42,6 +43,11 @@ table {
   border-collapse: collapse;
   min-width: 300px;
   flex: 1;
+}
+
+table caption {
+  text-align: left;
+  margin-bottom: 0.5rem;
 }
 
 table th {
