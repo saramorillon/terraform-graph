@@ -62,8 +62,8 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
     return (
       <li>
         {tree.diff ? (
-          <label htmlFor={encodeURIComponent(tree.diff.address)} className={tree.diff.action}>
-            {tree.label}
+          <label htmlFor={encodeURIComponent(tree.diff.address)}>
+            {this.renderActions(tree.diff.actions)} {tree.label}
           </label>
         ) : (
           tree.label
@@ -91,7 +91,9 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
               <tbody>
                 {tree.diff.changes.map((change) => (
                   <tr key={change.key}>
-                    <td className={change.action}>{change.key}</td>
+                    <td className="nowrap">
+                      {this.renderActions([change.action])} {change.key}
+                    </td>
                     <td>
                       <pre>{change.before}</pre>
                     </td>
@@ -109,5 +111,19 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
           children.map((child, key) => <Fragment key={key}>{this.renderTables(child)}</Fragment>)}
       </>
     )
+  }
+
+  renderActions(actions: string[]) {
+    const actionSymbol: Record<string, string> = {
+      create: '+',
+      update: '~',
+      delete: '-',
+    }
+
+    return actions.map((action) => (
+      <span key={action} className={action}>
+        {actionSymbol[action]}
+      </span>
+    ))
   }
 }

@@ -2,7 +2,7 @@ import { IDiff, IResource } from '../models'
 import isEqual = require('lodash.isequal')
 
 export function getDiff(resource: IResource): IDiff {
-  const diff: IDiff = { address: resource.address, action: resource.change.actions.join('-'), changes: [] }
+  const diff: IDiff = { address: resource.address, actions: resource.change.actions, changes: [] }
   resource.change.before = resource.change.before || {}
   resource.change.after = resource.change.after || {}
   for (const key of Object.keys(resource.change.after_unknown)) {

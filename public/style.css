@@ -10,7 +10,7 @@ ul {
   list-style-type: none;
 }
 
-ul li span {
+ul li > :first-child {
   padding-left: 0.5rem;
 }
 
@@ -70,16 +70,25 @@ table td pre {
   margin: 0;
 }
 
+.create,
+.update,
+.delete {
+  font-family: monospace;
+  font-weight: bold;
+}
+
 .create {
   color: var(--vscode-charts-green);
+}
+
+.update {
+  color: var(--vscode-charts-yellow);
 }
 
 .delete {
   color: var(--vscode-charts-red);
 }
 
-.update,
-.delete-create,
-.create-delete {
-  color: var(--vscode-charts-yellow);
+.nowrap {
+  white-space: nowrap;
 }
