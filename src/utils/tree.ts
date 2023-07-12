@@ -7,7 +7,7 @@ export function generateTree(plan: IPlan): ITree {
   for (const resource of plan.resource_changes) {
     if (resource.change.actions[0] === 'no-op') continue
     let curr = tree
-    for (const label of resource.address.split('.')) {
+    for (const label of splitAddress(resource.address)) {
       if (!curr.children[label]) {
         curr.children[label] = { label, children: {} }
       }
@@ -17,4 +17,26 @@ export function generateTree(plan: IPlan): ITree {
   }
 
   return tree
+}
+
+function splitAddress(address: string) {
+  const labels: string[] = []
+  let label = ''
+  let inForEach = false
+
+  for (const char of address) {
+    if (char === '[') inForEach = true
+    else if (char === ']') inForEach = false
+
+    if (char === '[' || char === ']' || (char === '.' && !inForEach)) {
+      labels.push(label)
+      label = ''
+    } else if (char !== '"' && char !== "'") {
+      label += char
+    }
+  }
+
+  labels.push(label)
+
+  return labels.filter(Boolean)
 }

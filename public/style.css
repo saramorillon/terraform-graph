@@ -11,7 +11,7 @@ ul {
 }
 
 ul li > :first-child {
-  padding-left: 0.5rem;
+  padding-left: 0.25rem;
 }
 
 ul li label {
@@ -91,4 +91,8 @@ table td pre {
 
 .nowrap {
   white-space: nowrap;
+}
+
+.address {
+  font-weight: bold;
 }
