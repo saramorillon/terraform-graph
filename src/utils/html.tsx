@@ -13,10 +13,10 @@ export function renderHtml(tree: ITree, scriptUrl: string, styleUrl: string, csp
         <link href={styleUrl} rel="stylesheet" />
       </head>
       <body>
-        <div id="root">
+        <div id="resources">
           <ul>{renderTree(tree)}</ul>
-          {renderTables(tree)}
         </div>
+        <div id="properties">{renderTables(tree)}</div>
         <script src={scriptUrl}></script>
       </body>
     </html>

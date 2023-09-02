@@ -26,7 +26,7 @@ exports[`renderHtml > should render change create action 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -38,6 +38,10 @@ exports[`renderHtml > should render change create action 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -116,7 +120,7 @@ exports[`renderHtml > should render change delete action 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -128,6 +132,10 @@ exports[`renderHtml > should render change delete action 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -206,7 +214,7 @@ exports[`renderHtml > should render change update action 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -218,6 +226,10 @@ exports[`renderHtml > should render change update action 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -296,7 +308,7 @@ exports[`renderHtml > should render clickable tree label if diff 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -308,6 +320,10 @@ exports[`renderHtml > should render clickable tree label if diff 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -359,7 +375,7 @@ exports[`renderHtml > should render diff create action 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -376,6 +392,10 @@ exports[`renderHtml > should render diff create action 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -427,7 +447,7 @@ exports[`renderHtml > should render diff delete action 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -444,6 +464,10 @@ exports[`renderHtml > should render diff delete action 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -495,7 +519,7 @@ exports[`renderHtml > should render diff in table 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -507,6 +531,10 @@ exports[`renderHtml > should render diff in table 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -583,7 +611,7 @@ exports[`renderHtml > should render diff update action 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -600,6 +628,10 @@ exports[`renderHtml > should render diff update action 1`] = `
           </label>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment>
         <React.Fragment>
           <input
@@ -651,7 +683,7 @@ exports[`renderHtml > should render empty html 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -660,6 +692,10 @@ exports[`renderHtml > should render empty html 1`] = `
           </span>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment />
     </div>
     <script
@@ -695,7 +731,7 @@ exports[`renderHtml > should render non-clickable tree label if no diff 1`] = `
   </head>
   <body>
     <div
-      id="root"
+      id="resources"
     >
       <ul>
         <li>
@@ -704,6 +740,10 @@ exports[`renderHtml > should render non-clickable tree label if no diff 1`] = `
           </span>
         </li>
       </ul>
+    </div>
+    <div
+      id="properties"
+    >
       <React.Fragment />
     </div>
     <script

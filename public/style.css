@@ -1,70 +1,81 @@
-#root {
+body {
   display: flex;
   gap: 1.5rem;
   padding: 0.75rem;
+  max-height: 100vh;
+  box-sizing: border-box;
 }
 
-ul {
+#resources {
+  overflow: auto;
+}
+
+#resources ul {
   margin: 0;
   padding-left: 1rem;
   list-style-type: none;
 }
 
-ul li > :first-child {
+#resources ul li > :first-child {
   padding-left: 0.25rem;
 }
 
-ul li label {
+#resources ul li label {
   cursor: pointer;
 }
 
-ul li label:after {
+#resources ul li label:after {
   content: ' >';
 }
 
-ul li label.selected {
+#resources ul li label.selected {
   text-decoration: underline;
 }
 
-ul ul li:before {
+#resources ul ul li:before {
   content: '┗';
 }
 
-input {
+#properties {
+  flex: 1;
+  min-width: 300px;
+  overflow: auto;
+}
+
+#properties input {
   display: none;
 }
 
-input:checked + table {
+#properties input:checked + table {
   display: table;
 }
 
-table {
+#properties table {
   display: none;
   border-collapse: collapse;
-  min-width: 300px;
-  flex: 1;
+  width: 100%;
 }
 
-table caption {
+#properties table caption {
   text-align: left;
   margin-bottom: 0.5rem;
 }
 
-table th {
+#properties table th {
   padding: 0.25rem 0.5rem;
 }
 
-table tbody tr:nth-child(odd) {
+#properties table tbody tr:nth-child(odd) {
   background-color: var(--vscode-tree-tableOddRowsBackground);
 }
 
-table td {
+#properties table td {
   max-width: 500px;
   vertical-align: top;
   padding: 0.25rem 0.5rem;
 }
 
-table td pre {
+#properties table td pre {
   white-space: pre-wrap;
   word-wrap: break-word;
   margin: 0;
