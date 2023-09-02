@@ -42,12 +42,10 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint \"{src,public}/**/*.{ts,tsx,js}\"",
-    "test": "node ./out/test/runTest.js"
+    "vscode:prepublish": "yarn build",
+    "build": "tsc -p tsconfig.build.json",
+    "watch": "tsc -watch -p tsconfig.build.json",
+    "lint": "eslint \"{src,tests,public}/**/*.{ts,tsx,js}\""
   },
   "devDependencies": {
     "@types/node": "20.2.5",
@@ -58,7 +56,8 @@
     "@typescript-eslint/parser": "^5.59.9",
     "@vscode/vsce": "^2.19.0",
     "eslint": "^8.42.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vitest": "^0.34.3"
   },
   "dependencies": {
     "radash": "^11.0.0",

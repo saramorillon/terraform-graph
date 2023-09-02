@@ -1,0 +1,714 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderHtml > should render change create action 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody>
+              <tr>
+                <td
+                  className="nowrap"
+                >
+                  <span
+                    className="create"
+                  >
+                    +
+                  </span>
+                   
+                  key
+                </td>
+                <td>
+                  <pre>
+                    before
+                  </pre>
+                </td>
+                <td>
+                  →
+                </td>
+                <td>
+                  <pre>
+                    after
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render change delete action 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody>
+              <tr>
+                <td
+                  className="nowrap"
+                >
+                  <span
+                    className="delete"
+                  >
+                    -
+                  </span>
+                   
+                  key
+                </td>
+                <td>
+                  <pre>
+                    before
+                  </pre>
+                </td>
+                <td>
+                  →
+                </td>
+                <td>
+                  <pre>
+                    after
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render change update action 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody>
+              <tr>
+                <td
+                  className="nowrap"
+                >
+                  <span
+                    className="update"
+                  >
+                    ~
+                  </span>
+                   
+                  key
+                </td>
+                <td>
+                  <pre>
+                    before
+                  </pre>
+                </td>
+                <td>
+                  →
+                </td>
+                <td>
+                  <pre>
+                    after
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render clickable tree label if diff 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody />
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render diff create action 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+            <span
+              className="create"
+            >
+              +
+            </span>
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody />
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render diff delete action 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+            <span
+              className="delete"
+            >
+              -
+            </span>
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody />
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render diff in table 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody>
+              <tr>
+                <td
+                  className="nowrap"
+                >
+                  <span
+                    className="action"
+                  />
+                   
+                  key
+                </td>
+                <td>
+                  <pre>
+                    before
+                  </pre>
+                </td>
+                <td>
+                  →
+                </td>
+                <td>
+                  <pre>
+                    after
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render diff update action 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <label
+            htmlFor="resource.address"
+          >
+            <span
+              className="update"
+            >
+              ~
+            </span>
+             
+            label
+          </label>
+        </li>
+      </ul>
+      <React.Fragment>
+        <React.Fragment>
+          <input
+            id="resource.address"
+            name="table"
+            type="radio"
+          />
+          <table>
+            <caption
+              className="address"
+            >
+              resource.address
+            </caption>
+            <tbody />
+          </table>
+        </React.Fragment>
+      </React.Fragment>
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render empty html 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <span>
+            label
+          </span>
+        </li>
+      </ul>
+      <React.Fragment />
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;
+
+exports[`renderHtml > should render non-clickable tree label if no diff 1`] = `
+<html
+  lang="en"
+>
+  <head>
+    <meta
+      charSet="UTF-8"
+    />
+    <meta
+      content="default-src cspSource"
+      httpEquiv="Content-Security-Policy"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <title>
+      Terraform graph
+    </title>
+    <link
+      href="styleUrl"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="root"
+    >
+      <ul>
+        <li>
+          <span>
+            label
+          </span>
+        </li>
+      </ul>
+      <React.Fragment />
+    </div>
+    <script
+      src="scriptUrl"
+    />
+  </body>
+</html>
+`;

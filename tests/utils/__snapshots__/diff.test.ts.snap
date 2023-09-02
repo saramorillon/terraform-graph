@@ -1,0 +1,109 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getDiff > should add created resource in diff 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [
+    {
+      "action": "create",
+      "after": "value",
+      "before": "(none)",
+      "key": "key",
+    },
+  ],
+}
+`;
+
+exports[`getDiff > should add created unknown resource in diff 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [
+    {
+      "action": "create",
+      "after": "(known after apply)",
+      "before": "(none)",
+      "key": "key",
+    },
+  ],
+}
+`;
+
+exports[`getDiff > should add deleted resource in diff 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [
+    {
+      "action": "delete",
+      "after": "(none)",
+      "before": "value",
+      "key": "key",
+    },
+  ],
+}
+`;
+
+exports[`getDiff > should add updated resource in diff 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [
+    {
+      "action": "update",
+      "after": "value2",
+      "before": "value",
+      "key": "key",
+    },
+  ],
+}
+`;
+
+exports[`getDiff > should not add no-op change in diff 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [],
+}
+`;
+
+exports[`getDiff > should return empty diff 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [],
+}
+`;
+
+exports[`getDiff > should return none for empty values 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [
+    {
+      "action": "create",
+      "after": "(none)",
+      "before": "(none)",
+      "key": "key",
+    },
+  ],
+}
+`;
+
+exports[`getDiff > should stringify object value 1`] = `
+{
+  "actions": [],
+  "address": "resource.address",
+  "changes": [
+    {
+      "action": "create",
+      "after": "{
+  \\"prop\\": \\"value\\"
+}",
+      "before": "(none)",
+      "key": "key",
+    },
+  ],
+}
+`;

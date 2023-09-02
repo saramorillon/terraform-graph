@@ -4,29 +4,31 @@ export interface IPlan {
 
 export interface IResource {
   address: string
-  change: IChange
+  change: IResourceChange
 }
 
-export interface IChange {
+export interface IResourceChange {
   actions: string[]
   before: Record<string, unknown> | null
   after: Record<string, unknown> | null
   after_unknown: Record<string, unknown>
 }
 
-export interface IDiff {
-  address: string
-  actions: string[]
-  changes: {
-    key: string
-    action: string
-    before: string
-    after: string
-  }[]
-}
-
 export interface ITree {
   label: string
   diff?: IDiff
   children: Record<string, ITree>
+}
+
+export interface IDiff {
+  address: string
+  actions: string[]
+  changes: IDiffChange[]
+}
+
+export interface IDiffChange {
+  key: string
+  action: string
+  before: string
+  after: string
 }

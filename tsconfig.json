@@ -1,9 +1,11 @@
 {
+  "include": ["src", "tests", "vitest.config.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
     "outDir": "dist",
     "strict": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["node", "vitest/globals"]
   }
 }

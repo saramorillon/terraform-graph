@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateTree > should add change in tree 1`] = `
+{
+  "children": {
+    "resource": {
+      "children": {
+        "address": {
+          "children": {},
+          "diff": {
+            "actions": [],
+            "address": "resource.address",
+            "changes": [],
+          },
+          "label": "address",
+        },
+      },
+      "label": "resource",
+    },
+  },
+  "label": "root",
+}
+`;
+
+exports[`generateTree > should not add no-op change in tree 1`] = `
+{
+  "children": {},
+  "label": "root",
+}
+`;
+
+exports[`generateTree > should return empty tree 1`] = `
+{
+  "children": {},
+  "label": "root",
+}
+`;
