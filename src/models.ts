@@ -4,15 +4,14 @@ export interface IPlan {
 
 export interface IResource {
   address: string
-  module_address?: string
-  type: string
-  name: string
-  change: {
-    actions: string[]
-    before: Record<string, unknown> | null
-    after: Record<string, unknown> | null
-    after_unknown: Record<string, unknown>
-  }
+  change: IChange
+}
+
+export interface IChange {
+  actions: string[]
+  before: Record<string, unknown> | null
+  after: Record<string, unknown> | null
+  after_unknown: Record<string, unknown>
 }
 
 export interface IDiff {

@@ -1,7 +1,7 @@
-import { Fragment } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import * as vscode from 'vscode'
-import { IPlan, ITree } from '../models'
+import { IPlan } from '../models'
+import { renderHtml } from '../utils/html'
 import { generateTree } from '../utils/tree'
 
 export class GraphEditor implements vscode.CustomTextEditorProvider {
@@ -25,105 +25,13 @@ export class GraphEditor implements vscode.CustomTextEditorProvider {
     try {
       const plan: IPlan = JSON.parse(document.getText())
       const tree = generateTree(plan)
+      const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'public', 'index.js'))
+      const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'public', 'style.css'))
+      const jsx = renderHtml(tree, scriptUri.toString(), styleUri.toString(), webview.cspSource)
       webview.options = { enableScripts: true }
-      webview.html = renderToStaticMarkup(this.renderHtml(tree, webview))
+      webview.html = renderToStaticMarkup(jsx)
     } catch (error) {
       // Do nothing
     }
-  }
-
-  renderHtml(tree: ITree, webview: vscode.Webview): JSX.Element {
-    const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'public', 'index.js'))
-    const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'public', 'style.css'))
-
-    return (
-      <html lang="en">
-        <head>
-          <meta charSet="UTF-8" />
-          <meta httpEquiv="Content-Security-Policy" content={`default-src ${webview.cspSource}`} />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Terraform graph</title>
-
-          <link href={styleUri.toString()} rel="stylesheet" />
-        </head>
-        <body>
-          <div id="root">
-            <ul>{this.renderTree(tree)}</ul>
-            {this.renderTables(tree)}
-          </div>
-          <script src={scriptUri.toString()}></script>
-        </body>
-      </html>
-    )
-  }
-
-  renderTree(tree: ITree): JSX.Element {
-    const children = Object.values(tree.children)
-    return (
-      <li>
-        {tree.diff ? (
-          <label htmlFor={encodeURIComponent(tree.diff.address)}>
-            {this.renderActions(tree.diff.actions)} {tree.label}
-          </label>
-        ) : (
-          <span>{tree.label}</span>
-        )}
-        {Boolean(children.length) && (
-          <ul>
-            {children.map((child, key) => (
-              <Fragment key={key}>{this.renderTree(child)}</Fragment>
-            ))}
-          </ul>
-        )}
-      </li>
-    )
-  }
-
-  renderTables(tree: ITree): JSX.Element {
-    const children = Object.values(tree.children)
-    return (
-      <>
-        {tree.diff && (
-          <>
-            <input id={encodeURIComponent(tree.diff.address)} type="radio" name="table" />
-            <table>
-              <caption className="address">{tree.diff.address}</caption>
-              <tbody>
-                {tree.diff.changes.map((change) => (
-                  <tr key={change.key}>
-                    <td className="nowrap">
-                      {this.renderActions([change.action])} {change.key}
-                    </td>
-                    <td>
-                      <pre>{change.before}</pre>
-                    </td>
-                    <td>→</td>
-                    <td>
-                      <pre>{change.after}</pre>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        )}
-        {Boolean(children.length) &&
-          children.map((child, key) => <Fragment key={key}>{this.renderTables(child)}</Fragment>)}
-      </>
-    )
-  }
-
-  renderActions(actions: string[]) {
-    const actionSymbol: Record<string, string> = {
-      create: '+',
-      update: '~',
-      delete: '-',
-    }
-
-    return actions.map((action) => (
-      <span key={action} className={action}>
-        {actionSymbol[action]}
-      </span>
-    ))
   }
 }

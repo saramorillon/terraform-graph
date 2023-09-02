@@ -1,5 +1,5 @@
+import { isEqual } from 'radash'
 import { IDiff, IResource } from '../models'
-import isEqual = require('lodash.isequal')
 
 export function getDiff(resource: IResource): IDiff {
   const diff: IDiff = { address: resource.address, actions: resource.change.actions, changes: [] }
