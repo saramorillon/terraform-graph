@@ -31,7 +31,7 @@ The command generates two files:
 
 You can visualize your terraform graph by simply opening the `.tfgraph` file in your editor.
 
-![Screenshot](./screenshot.png)
+![Screenshot](./docs/screenshot.png)
 
 On the left you can see all the resource changes. Red are the deleted resources, green the added ones and orange the updated ones.
 

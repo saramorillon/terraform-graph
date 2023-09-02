@@ -19,7 +19,7 @@
   ],
   "activationEvents": [],
   "main": "./dist/index.js",
-  "icon": "icon.png",
+  "icon": "docs/icon.png",
   "publisher": "saramorillon",
   "contributes": {
     "customEditors": [
