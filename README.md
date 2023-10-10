@@ -1,4 +1,4 @@
-# <img src="./icon.png" alt="Logo" height="28"> Terraform Graph
+# <img src="./docs/icon.png" alt="Logo" height="28"> Terraform Graph
 
 Visual representation of a Terraform plan, showing added, deleted and updated resources.
 
