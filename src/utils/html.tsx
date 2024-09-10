@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { ITree } from '../models'
 
-export function renderHtml(tree: ITree, scriptUrl: string, styleUrl: string, cspSource: string): JSX.Element {
+export function renderHtml(tree: ITree, scriptUrl: string, stylesUrl: string[], cspSource: string): JSX.Element {
   return (
     <html lang="en">
       <head>
@@ -10,7 +10,9 @@ export function renderHtml(tree: ITree, scriptUrl: string, styleUrl: string, csp
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Terraform graph</title>
 
-        <link href={styleUrl} rel="stylesheet" />
+        {stylesUrl.map((styleUrl) => (
+          <link href={styleUrl} rel="stylesheet" />
+        ))}
       </head>
       <body>
         <div id="resources">
@@ -53,7 +55,23 @@ function renderTables(tree: ITree): JSX.Element {
         <>
           <input id={encodeURIComponent(tree.diff.address)} type="radio" name="table" />
           <table>
-            <caption className="address">{tree.diff.address}</caption>
+            <caption className="address">
+              {tree.diff.address}
+              <div className="monaco-toolbar">
+                <div className="monaco-action-bar">
+                  <ul className="actions-container" role="toolbar">
+                    <li className="action-item" role="presentation" custom-hover="true">
+                      <span
+                        className="action-label codicon codicon-copy"
+                        role="button"
+                        aria-label="Copy resource address"
+                        data-content={tree.diff.address}
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </caption>
             <tbody>
               {tree.diff.changes.map((change) => (
                 <tr key={change.key}>

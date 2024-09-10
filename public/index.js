@@ -15,6 +15,13 @@ document.querySelectorAll('input').forEach((input) =>
   })
 )
 
+document.querySelectorAll('.codicon-copy').forEach((input) =>
+  input.addEventListener('click', (e) => {
+    vscode.postMessage({ type: 'copy', content: e.target.dataset.content })
+    console.log(vscode)
+  })
+)
+
 const state = vscode.getState()
 if (state && state.selected) {
   const input = document.getElementById(state.selected)
