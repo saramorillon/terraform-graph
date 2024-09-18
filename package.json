@@ -2,7 +2,7 @@
   "name": "terraform-graph",
   "displayName": "Terraform Graph",
   "description": "Visual representation of a Terraform plan, showing added, deleted and updated resources",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "license": "MIT",
   "author": {
     "name": "Sara Morillon",
