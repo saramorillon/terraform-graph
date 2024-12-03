@@ -17,11 +17,8 @@ export function graphCommand() {
   const cwd = getCwd()
   if (!cwd) return
 
-  // Get the configured shell command
-  const config = vscode.workspace.getConfiguration(
-    "terraform-graph"
-  );
-  const shellCommand = config.command ?? 'terraform plan -out=plan && terraform show -json plan > plan.tfgraph';
+  const config = vscode.workspace.getConfiguration('terraform-graph')
+  const shellCommand = config.command ?? 'terraform plan -out=plan && terraform show -json plan > plan.tfgraph'
 
   const terminal = vscode.window.createTerminal({ name: 'TfGraph', cwd })
   terminal.show()
