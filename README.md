@@ -20,6 +20,14 @@ This will open a terminal in your current working directory and run the followin
 terraform plan -out=plan && terraform show -json plan > plan.tfgraph
 ```
 
+You can customize the command using the `terraform-graph.command` configuration option, e.g. in `.vscode/settings.json`:
+
+```json
+{
+    "terraform-graph.command": "terraform plan -out=plan && terraform show -json plan > plan.tfgraph"
+}
+```
+
 If a file is currently open in your editor, the command will be run in the directory of the file.
 
 The command generates two files:

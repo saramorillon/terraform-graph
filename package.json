@@ -39,7 +39,17 @@
         "command": "terraform-graph.generate",
         "title": "Generate Terraform graph"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Terraform Graph",
+      "properties": {
+        "terraform-graph.command": {
+          "type": "string",
+          "default": "terraform plan -out=plan && terraform show -json plan > plan.tfgraph",
+          "description": "The command to run to generate the Terraform graph"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn build",
